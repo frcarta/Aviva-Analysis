@@ -13,7 +13,7 @@ from torch import nn
 from tqdm import tqdm
 
 from network import *
-from loss import SpectralLoss, StructuralLoss
+from loss import MySpectralLoss, StructuralLoss
 
 from tools.spectral_tools import gen_mtf, normalize_prisma, denormalize_prisma
 
@@ -118,12 +118,13 @@ def test_r_pnn(args):
     else:
         print("Skipping weight loading — training from scratch.")
 
-    criterion_spec = SpectralLoss(
-        # gen_mtf(ratio, sensor, kernel_size=61, nbands=1), ratio, device
-        gen_mtf(ratio, sensor, kernel_size=args["mtf_kernel_size"], nbands=1),
-        ratio,
-        device,
-    ).to(device)
+    # criterion_spec = SpectralLoss(
+    # gen_mtf(ratio, sensor, kernel_size=61, nbands=1), ratio, device
+    #    gen_mtf(ratio, sensor, kernel_size=args["mtf_kernel_size"], nbands=1),
+    #    ratio,
+    #    device,
+    # ).to(device)
+    criterion_spec = MySpectralLoss(ratio, device).to(device)
     criterion_struct = StructuralLoss(ratio).to(device)
 
     optim = torch.optim.Adam(net.parameters(), lr=learning_rate)
