@@ -54,22 +54,24 @@ config = {
     "sat_val": 80,
     "net_scope": 6,
     "ms_scope": 1,
-    # ---------------------------------
-    "input": "Datasets/aviva_eye_aligned_r6_rwl.mat",
+    # --------------------------------- my parameters
+    "input": "Datasets/denoised_aviva_nose_aligned_r6_all_wl.mat",
     "ratio": 6,
     "out_dir": "Outputs",
     "gpu_number": 0,
     "use_cpu": False,
     # "learning_rate": -1.0,
     "pretrained": False,
-    "epochs": 2000,
-    "min_epochs": 100,
-    "patience": 50,
+    "epochs": 3000,
+    # Early stopping parameters
+    "min_epochs": 1,
+    "patience": 40,
     "delta": 0.5e-2,
     "relative": True,  # early stopping criterion uses realtive or absolute delta
     "alpha": 5,  # weight of the struct loss wrt spectral loss
     "learning_rate": 0.0001,
     "net_scope": 3,  # np.floor(half of receptive field), depends on convolutional layers
     # "save_path": "",
-    "mtf_kernel_size": 15,  # must be greater than 2*ratio and odd
+    "mtf_kernel_size": 7,  # must be greater than 2*ratio and odd
+    "interpolation": "nearest",
 }
